@@ -1,0 +1,22 @@
+{% extends 'home/base.html' %}
+{% load static %}
+{% block content %}
+{% load crispy_forms_tags %}
+{% load crispy_forms_filters %}
+    <div class="container mt-5">
+        <form method = 'post' id="entryForm" action="{% url 'home' %}">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <a class="btn btn-lime text-oxford-blue" onclick="generatePassword(10, 'password', 'entryForm')">Generate Password</a>
+            <button class="btn btn-lime text-oxford-blue" type="submit">Create</button>
+        </form>
+        <div class="mt-5">
+            <ul>
+            {% for entry in entries %}
+                <li class="my-3 text-vanilla">Website: <a href="{{entry.website}}" target="_blank" rel="noopener noreferrer">{{entry.website}}</a>,
+                    Username: {{entry.username}}, Password: ******** <a class="detail" href="{% url 'detail' entry.id %}"><img src="{% static 'home/eye.svg' %}" width="33"></a></li>
+            {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock content %}
