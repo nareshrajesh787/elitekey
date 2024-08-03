@@ -31,7 +31,4 @@ urlpatterns = [
     path('logout/', user_views.logout_view, name='logout'),
     path('register/', user_views.register, name='register'),
     path('', home_views.EntryListView.as_view(), name='home'),
-]
-
-if settings.DEBUG:
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
